@@ -1,5 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	h1= title
+	p Welcome to #{title}
+
+	if user
+		h2 You are a user!
+	else 
+		h2 You are not a user
+
+	p #{test}

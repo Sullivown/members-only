@@ -12,7 +12,7 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var signUpRouter = require('./routes/sign-up');
 
 var app = express();
 
@@ -26,7 +26,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// bcrypt Setup
+// passport and bcrypt Setup
 passport.use(
 	new LocalStrategy((username, password, done) => {
 		User.findOne({ username: username }, (err, user) => {
@@ -38,7 +38,7 @@ passport.use(
 			}
 			bcrypt.compare(password, user.password, (err, res) => {
 				if (res) {
-					// passwords match! log user in
+					// passwords match! return user
 					return done(null, user);
 				} else {
 					// passwords do not match!
@@ -48,6 +48,16 @@ passport.use(
 		});
 	})
 );
+
+passport.serializeUser(function (user, done) {
+	done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+	User.findById(id, function (err, user) {
+		done(err, user);
+	});
+});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -63,9 +73,13 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use((req, res, next) => {
+	res.locals.user = req.session.user;
+	next();
+});
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/sign-up', signUpRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
