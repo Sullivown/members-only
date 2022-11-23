@@ -94,6 +94,10 @@ exports.user_login_post = passport.authenticate('local', {
 	failureMessage: true,
 });
 
+exports.user_logout_get = (req, res, next) => {
+	res.render('logout_confirm', { title: 'Log out?' });
+};
+
 exports.user_logout_post = (req, res, next) => {
 	req.logout(function (err) {
 		if (err) {

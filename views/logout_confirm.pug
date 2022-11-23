@@ -1,0 +1,20 @@
+extends layout 
+
+block content 
+	h1= title
+
+	if user
+
+		p Are you sure you want to log out?
+		form(method='POST' action='')
+
+			div.form-group
+			button.btn.btn-primary(type='submit') Submit
+		
+		if errors
+			ul
+			for error in errors
+				li!= error.msg
+	
+	else 
+		p You are not logged in
