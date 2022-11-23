@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 const User = require('../models/user');
 const Post = require('../models/post');
+const passport = require('passport');
 
 exports.user_detail = function (req, res, next) {
 	async.parallel(
@@ -82,3 +83,22 @@ exports.user_create_post = [
 		});
 	},
 ];
+
+exports.user_login_get = function (req, res, next) {
+	res.render('login_form', { title: 'Log-in' });
+};
+
+exports.user_login_post = passport.authenticate('local', {
+	successRedirect: '/',
+	failureRedirect: '/log-in',
+	failureMessage: true,
+});
+
+exports.user_logout_post = (req, res, next) => {
+	req.logout(function (err) {
+		if (err) {
+			return next(err);
+		}
+		res.redirect('/');
+	});
+};
