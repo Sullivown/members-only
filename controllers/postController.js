@@ -15,4 +15,40 @@ exports.post_list = function (req, res, next) {
 		});
 };
 
-exports.post_create_post = function (req, res, next) {};
+exports.post_create_post = [
+	body('post_title')
+		.trim()
+		.isLength({ min: 1 })
+		.withMessage('You must enter a title')
+		.escape(),
+	body('post_message')
+		.trim()
+		.isLength({ min: 1 })
+		.withMessage('You must enter a message')
+		.escape(),
+	(req, res, next) => {
+		const errors = validationResult(req);
+
+		const post = new Post({
+			title: req.body.post_title,
+			message: req.body.post_message,
+			user: req.session.passport.user,
+		});
+
+		if (!errors.isEmpty()) {
+			res.render('/', {
+				title: 'Home',
+				post,
+				errors: errors.array(),
+			});
+			return;
+		}
+
+		post.save((err) => {
+			if (err) {
+				return next(err);
+			}
+			res.redirect('/');
+		});
+	},
+];

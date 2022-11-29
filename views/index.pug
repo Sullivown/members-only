@@ -1,12 +1,35 @@
 extends layout
 
 block content
+	block post_form
+
 	h1= title
 	p Welcome to #{title}
 
 	if user
-		h2 You are a user!
-	else 
-		h2 You are not a user
+		form(method='POST' action='')
+			div.form-group
+			label(for='post_title') Title:
+			input#post_title.form-control(type='text' placeholder='Message Title' name='post_title' required='true' value=(undefined===post ? '' : post.post_title))
+			
+			div.form-group
+				label(for='post_message') Message:
+				textarea#post_message.form-control(placeholder='Type your message...' name='post_message' required='true' value=(undefined===post ? '' : post.post_message))
 
-	p #{test}
+
+			div.form-group
+				button.btn.btn-primary(type='submit') Submit
+		
+		if errors
+			ul
+			for error in errors
+				li!= error.msg
+
+	if post_list
+		ul
+			each post in post_list
+				li= post.title + post.message
+
+	else 
+		h2 There are no posts to display!
+
