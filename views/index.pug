@@ -3,8 +3,7 @@ extends layout
 block content
 	block post_form
 
-	h1= title
-	p Welcome to #{title}
+	h1 Message Board
 
 	if user
 		form(method='POST' action='')
@@ -26,9 +25,13 @@ block content
 				li!= error.msg
 
 	if post_list
-		ul
 			each post in post_list
-				li= post.title + post.message
+				div.post
+					.post-title= post.title 
+					.post-message=post.message 
+					.post-meta 
+						p=(user ? post.user.username : 'Anon')
+						p= post.creation_date
 
 	else 
 		h2 There are no posts to display!

@@ -1,8 +1,47 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	margin: 0px;
+	padding: 0px;
+	font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: red;
+	padding: 15px;
+	align-items: center;
+}
+
+.site-title {
+	text-decoration: none;
+}
+
+nav li {
+	list-style-type: none;
+}
+
+.content {
+	margin-left: 15px;
+	margin-right: 15px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.post {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 75%;
+	background-color: beige;
+	margin-top: 15px;
+	padding: 15px;
+	border-radius: 5px;
+}
+
+.post-meta {
+	display: flex;
+	justify-content: space-between;
 }
