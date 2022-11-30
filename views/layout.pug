@@ -16,9 +16,11 @@ html
 				ul
 					if user
 						li
-							a(href='/log-out') Log Out 
+							a(href='/log-out')
+								button Log Out 
 					else 
 						li
-							a(href='/log-in') Log In
+							a(href='/log-in')
+								button Log In
 		.content 
 			block content

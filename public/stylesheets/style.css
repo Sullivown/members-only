@@ -1,24 +1,31 @@
 body {
 	margin: 0px;
 	padding: 0px;
-	font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+	font-size: 1rem;
+	font-family: sans-serif;
+	background-color: black;
+	color: rgb(231, 233, 234);
+	font-family: ;
 }
 
 header {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	background-color: red;
+	background-color: rgb(22, 24, 28);
 	padding: 15px;
 	align-items: center;
 }
 
 .site-title {
+	color: rgb(231, 233, 234);
 	text-decoration: none;
 }
 
-nav li {
+nav li,
+nav a {
 	list-style-type: none;
+	color: rgb(231, 233, 234);
 }
 
 .content {
@@ -33,15 +40,84 @@ nav li {
 .post {
 	display: flex;
 	flex-direction: column;
+	gap: 15px;
 	width: 100%;
 	max-width: 75%;
-	background-color: beige;
+	background-color: rgb(22, 24, 28);
+	color: rgb(231, 233, 234);
 	margin-top: 15px;
 	padding: 15px;
 	border-radius: 5px;
 }
 
+.post:hover {
+	background-color: rgb(38, 41, 46);
+}
+
+.post-title {
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+.post-message {
+}
+
 .post-meta {
 	display: flex;
 	justify-content: space-between;
+	font-size: 0.8rem;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	background-color: rgb(22, 24, 28);
+	margin-top: 15px;
+	padding: 15px;
+	border-radius: 5px;
+	align-items: center;
+	justify-content: center;
+}
+
+input,
+textarea {
+	padding: 5px;
+	background-color: rgb(22, 24, 28);
+	color: white;
+	border: none;
+	font-family: sans-serif;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 5px;
+}
+
+.create {
+	width: 75%;
+}
+
+button {
+	background-color: rgb(231, 233, 234);
+	color: black;
+	border: 1px solid rgb(231, 233, 234);
+	border-radius: 999px;
+	min-height: 32px;
+	font-weight: bold;
+	max-width: 150px;
+	min-width: 100px;
+	align-self: center;
+	cursor: pointer;
+}
+
+button:active {
+	background-color: rgb(202, 205, 207);
+}
+
+.log-out {
+	padding: 0px;
+	margin: 0px;
 }

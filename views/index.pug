@@ -6,14 +6,14 @@ block content
 	h1 Message Board
 
 	if user
-		form(method='POST' action='')
+		form(method='POST' action='').create
 			div.form-group
-			label(for='post_title') Title:
-			input#post_title.form-control(type='text' placeholder='Message Title' name='post_title' required='true' value=(undefined===post ? '' : post.post_title))
+				label(for='post_title') Title:
+				input#post_title.form-control(type='text' placeholder='Message Title' name='post_title' required='true' value=(undefined===post ? '' : post.post_title))
 			
 			div.form-group
 				label(for='post_message') Message:
-				textarea#post_message.form-control(placeholder='Type your message...' name='post_message' required='true' value=(undefined===post ? '' : post.post_message))
+				textarea#post_message.form-control(placeholder='Type your message...' name='post_message' required='true' rows=5 value=(undefined===post ? '' : post.post_message))
 
 
 			div.form-group
@@ -30,8 +30,8 @@ block content
 					.post-title= post.title 
 					.post-message=post.message 
 					.post-meta 
-						p=(user ? post.user.username : 'Anon')
-						p= post.creation_date
+						p by #{user ? post.user.username : 'Anon'}
+						p #{post.creation_date}
 
 	else 
 		h2 There are no posts to display!
