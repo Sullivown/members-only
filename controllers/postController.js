@@ -55,11 +55,15 @@ exports.post_create_post = [
 ];
 
 exports.post_delete = function (req, res, next) {
-	Post.findByIdAndDelete(req.body.post_id, function (err, docs) {
-		if (err) {
-			next(err);
-		} else {
-			res.redirect('/');
-		}
-	});
+	if (req.user.admin) {
+		Post.findByIdAndDelete(req.body.post_id, function (err, docs) {
+			if (err) {
+				next(err);
+			} else {
+				res.redirect('/');
+			}
+		});
+	} else {
+		res.status(403).json({ msg: 'You are unauthorized to delete posts' });
+	}
 };
