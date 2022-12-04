@@ -6,4 +6,4 @@ A message board app that only allows members to see the usernames of those who h
 
 ## Learning Objectives
 
-To gain experience with express, passport and managing user logins.
+To gain experience with express, passport, managing users and admin access control.
