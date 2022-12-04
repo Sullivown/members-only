@@ -38,7 +38,9 @@ passport.use(
 				return done(err);
 			}
 			if (!user) {
-				return done(null, false, { message: 'Incorrect username' });
+				return done(null, false, {
+					message: 'Incorrect username or password',
+				});
 			}
 			bcrypt.compare(password, user.password, (err, res) => {
 				if (res) {
@@ -46,7 +48,9 @@ passport.use(
 					return done(null, user);
 				} else {
 					// passwords do not match!
-					return done(null, false, { message: 'Incorrect password' });
+					return done(null, false, {
+						message: 'Incorrect username or password',
+					});
 				}
 			});
 		});
@@ -78,7 +82,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
-	req.session.passport && (res.locals.user = req.session.passport.user);
+	if (req.isAuthenticated()) {
+		res.locals.user = req.session.passport.user;
+	}
+	console.log(req.session);
 	next();
 });
 

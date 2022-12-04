@@ -5,6 +5,9 @@ block content
 
 	h1 Message Board
 
+	if user && user.admin
+		h3 Hoo
+
 	if user
 		form(method='POST' action='').create
 			div.form-group
@@ -32,6 +35,13 @@ block content
 					.post-meta 
 						p by #{user ? post.user.username : 'Anon'}
 						p #{post.creation_date}
+					if user && user.admin
+						form(method='POST' action='/delete')
+							input(type='hidden' value=post.id)
+
+							div.form-group
+								button.btn.btn-primary(type='submit') Delete
+
 
 	else 
 		h2 There are no posts to display!
