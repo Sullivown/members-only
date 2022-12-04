@@ -124,7 +124,8 @@ button:active {
 	background-color: rgb(202, 205, 207);
 }
 
-.log-out {
+.log-out,
+.delete-form {
 	padding: 0px;
 	margin: 0px;
 }

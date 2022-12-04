@@ -53,3 +53,13 @@ exports.post_create_post = [
 		});
 	},
 ];
+
+exports.post_delete = function (req, res, next) {
+	Post.findByIdAndDelete(req.body.post_id, function (err, docs) {
+		if (err) {
+			next(err);
+		} else {
+			res.redirect('/');
+		}
+	});
+};

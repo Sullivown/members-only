@@ -36,11 +36,9 @@ block content
 						p by #{user ? post.user.username : 'Anon'}
 						p #{post.creation_date}
 					if user && user.admin
-						form(method='POST' action='/delete')
-							input(type='hidden' value=post.id)
-
-							div.form-group
-								button.btn.btn-primary(type='submit') Delete
+						form(method='POST' action='/delete').delete-form
+							input(type='hidden' name='post_id' value=post.id)
+							button.btn.btn-primary(type='submit') Delete
 
 
 	else 

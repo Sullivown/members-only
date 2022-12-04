@@ -83,9 +83,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
 	if (req.isAuthenticated()) {
-		res.locals.user = req.session.passport.user;
+		res.locals.user = req.user;
 	}
-	console.log(req.session);
 	next();
 });
 
